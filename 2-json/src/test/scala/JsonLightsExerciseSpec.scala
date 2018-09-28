@@ -7,23 +7,26 @@ import play.api.data.validation.ValidationError
 class JsonLightsExerciseSpec extends WordSpec with MustMatchers {
   import JsonLightsExercise._
 
-  "trafficLightFormat" must {
-    "write a light" in {
-      Json.toJson(Green) must equal {
-        JsNumber(2)
-      }
-    }
+  // TODO:
+  // Feel free to use these tests to verify your work:
 
-    "read valid json" in {
-      Json.fromJson[TrafficLight](JsNumber(1)) must equal {
-        JsSuccess(Amber)
-      }
-    }
+  // "trafficLightFormat" must {
+  //   "write a light" in {
+  //     Json.toJson(Green) must equal {
+  //       JsNumber(2)
+  //     }
+  //   }
 
-    "read invalid json" in {
-      Json.fromJson[TrafficLight](JsNumber(3)) must equal {
-        JsError("error.expected.trafficlight")
-      }
-    }
-  }
+  //   "read valid json" in {
+  //     Json.fromJson[TrafficLight](JsNumber(1)) must equal {
+  //       JsSuccess(Amber)
+  //     }
+  //   }
+
+  //   "read invalid json" in {
+  //     Json.fromJson[TrafficLight](JsNumber(3)) must equal {
+  //       JsError("error.expected.trafficlight")
+  //     }
+  //   }
+  // }
 }

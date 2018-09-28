@@ -14,10 +14,26 @@ import models._
 class WeatherController @Inject() (
   val controllerComponents: ControllerComponents,
   val ws: WSClient
-)(
-  implicit
-  val ec: ExecutionContext
-) extends BaseController {
+)(implicit val ec: ExecutionContext) extends BaseController {
+  // TODO:
+  // Make this WeatherController operational in the following steps:
+  //
+  // 1. Use the WSClient injected in the constructor above to
+  //    call out to the Open Weather Map API and fetch
+  //    the forecast/location for the relevant town
+  //
+  // 2. Create case classes representing Weather and Forecast data.
+  //    Include at least three interesting fields from each source.
+  //    Bonus points for including at least one field
+  //    with its own internal structure.
+  //
+  // 3. Write appropriate JSON formats for parsing the incoming JSON.
+  //
+  // 4. (OPTIONAL) If you have time, perform some kind of
+  //    interesting operation on the data as it comes through.
+  //    Perhaps convert temperatures to farenheight,
+  //    or calculate highs and lows from the series of values in the forecast.
+
   def apiKey: String =
     ??? // TODO: You'll have to sign up for an API key at http://openweathermap.org
 
@@ -40,16 +56,11 @@ class WeatherController @Inject() (
       } yield Ok(Json.toJson(Report(location, weather, forecast)))
     }
 
-  def fetchWeather(location: String): Future[Weather] =
-    fetch[Weather]("weather", location)
+  def fetchWeather(location: String): Future[JsValue] =
+    // TODO: Rewrite me
+    Future.successful(JsNull)
 
-  def fetchForecast(location: String): Future[Forecast] =
-    fetch[Forecast]("forecast", location)
-
-  def fetch[A: Reads](endpoint: String, location: String): Future[A] =
-    ws.url(s"http://api.openweathermap.org/data/2.5/$endpoint?q=$location,uk&appid=$apiKey")
-      .withFollowRedirects(true)
-      .withRequestTimeout(500.milliseconds)
-      .get()
-      .map(_.json.as[A]) // TODO: No error handling here! D:
+  def fetchForecast(location: String): Future[JsValue] =
+    // TODO: Rewrite me
+    Future.successful(JsNull)
 }

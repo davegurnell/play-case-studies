@@ -8,41 +8,44 @@ class JsonMacroExerciseSpec extends WordSpec with MustMatchers {
 
   lazy val now = new Date()
 
-  "messageFormat" must {
-    "write a message" in {
-      val message = Message(Some(1), now, "alice", "Hello world!")
-      val json    = Json.obj(
-        "id"     -> 1,
-        "posted" -> now.getTime,
-        "author" -> "alice",
-        "text"   -> "Hello world!"
-      )
+  // TODO:
+  // Feel free to use these tests to verify your work:
 
-      Json.toJson(message) must equal(json)
-    }
+  // "messageFormat" must {
+  //   "write a message" in {
+  //     val message = Message(Some(1), now, "alice", "Hello world!")
+  //     val json    = Json.obj(
+  //       "id"     -> 1,
+  //       "posted" -> now.getTime,
+  //       "author" -> "alice",
+  //       "text"   -> "Hello world!"
+  //     )
 
-    "read valid json" in {
-      val message = Message(None, now, "alice", "Hello world!")
-      val json    = Json.obj(
-        "posted" -> now.getTime,
-        "author" -> "alice",
-        "text"   -> "Hello world!"
-      )
+  //     Json.toJson(message) must equal(json)
+  //   }
 
-      Json.fromJson[Message](json) must equal(JsSuccess(message))
-    }
+  //   "read valid json" in {
+  //     val message = Message(None, now, "alice", "Hello world!")
+  //     val json    = Json.obj(
+  //       "posted" -> now.getTime,
+  //       "author" -> "alice",
+  //       "text"   -> "Hello world!"
+  //     )
 
-    "read invalid json" in {
-      val json    = Json.obj(
-        "posted" -> "alice",
-        "author" -> now.getTime
-      )
+  //     Json.fromJson[Message](json) must equal(JsSuccess(message))
+  //   }
 
-      Json.fromJson[Message](json) must equal {
-        JsError(JsPath \ "posted", JsonValidationError("error.expected.date.isoformat", "yyyy-MM-dd")) ++
-        JsError(JsPath \ "author", "error.expected.jsstring") ++
-        JsError(JsPath \ "text",   "error.path.missing")
-      }
-    }
-  }
+  //   "read invalid json" in {
+  //     val json    = Json.obj(
+  //       "posted" -> "alice",
+  //       "author" -> now.getTime
+  //     )
+
+  //     Json.fromJson[Message](json) must equal {
+  //       JsError(JsPath \ "posted", JsonValidationError("error.expected.date.isoformat", "yyyy-MM-dd")) ++
+  //       JsError(JsPath \ "author", "error.expected.jsstring") ++
+  //       JsError(JsPath \ "text",   "error.path.missing")
+  //     }
+  //   }
+  // }
 }
