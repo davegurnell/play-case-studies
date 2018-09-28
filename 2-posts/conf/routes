@@ -1,0 +1,4 @@
+POST /any       controllers.PostController.any
+POST /json      controllers.PostController.json
+POST /form      controllers.PostController.form
+POST /multipart controllers.PostController.multipart
