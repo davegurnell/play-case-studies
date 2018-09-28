@@ -20,17 +20,23 @@ lazy val routes =
     .enablePlugins(PlayScala)
     .settings(commonSettings)
 
+lazy val posts =
+  project
+    .in(file("2-posts"))
+    .enablePlugins(PlayScala)
+    .settings(commonSettings)
+
 // This one isn't a while Play application.
 // It just uses the Play JSON library.
 lazy val json =
   project
-    .in(file("2-json"))
+    .in(file("3-json"))
     .settings(commonSettings)
     .settings(libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.9")
 
 lazy val webservices =
   project
-    .in(file("3-webservices"))
+    .in(file("4-webservices"))
     .enablePlugins(PlayScala)
     .settings(commonSettings)
     .settings(libraryDependencies += ws)
@@ -41,6 +47,7 @@ lazy val root =
     .aggregate(
       hello,
       routes,
+      posts,
       json,
       webservices,
     )
